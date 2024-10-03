@@ -7,15 +7,42 @@
     <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
-    <section id="body">
-        <div class="container">
-            <% if (locals.data) %>
-            <div class="note">
+    <section id="nav-bar">
+         
+        <form action="/commentor" method="post">
+            <div class="nav"> 
+                <div class="commentor-options">
+                    <input type="submit" hidden name="commentor" value="all" id="all-commentors">
+                    <label for="all-commentors">All Commentors</label>
+                </div>
+
+                <div class="new commentor-options">
+                    <input type="submit" hidden name="commentor" value="new" id="new-commentor">
+                    <label for="new-commentor">Add Commentor</label>
+                </div>
+
+                <% if (locals.notes) {%>
                 <% notes.forEach(note => { %>
+                <div class="commentor-options">
+                    <input type="submit" hidden name="commentor" value="<%= note.commentor_id %>" id="<%= note.commentor_id %>">
+                    <label for="<%= note.commentor_id %>"><%= note.name %></label>
+                </div>
+            </div>
+            </form>
+         
+    </section>
+
+    <section id="content">
+        <div class="container">
+            <div class="note">
+                
                     <img class="cover-book" src="<%= note.isbn_url %>" alt="book cover">
+                    <h2><%= note.title %> - <%= note.author %></h2>
+                    <h3>Commented by <%= note.name %></h3>
                     <p><%= note.summary_note %></p>
-                    <p><%= note.rating %></p>
+                    <p>Rate <%= note.rating %>/10</p>
                 <% }); %>
+                <% } %>
             </div>
         </div>
     </section>

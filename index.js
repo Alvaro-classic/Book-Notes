@@ -20,13 +20,20 @@ const db = new pg.Client({
 db.connect()
 
 async function loadDb(){
-    const response = await db.query("select * from note");
+    const response = await db.query("select * from commentor join note on commentor.id = note.commentor_id");
     const data = response.rows;
     return data;
 }
 
+async function getCommentor (id) {
+    const response = await db.query("select name from commentor where commentor.id = $1",
+        [id]);
+    const commentor = response.rows[0].name;
+    return commentor
+}
+
 app.get("/", async (req, res) => {
-    const data = await loadDb()
+    const data = await loadDb();
     res.render("index.ejs", {
         notes: data
     });
