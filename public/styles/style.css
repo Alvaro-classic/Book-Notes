@@ -1,6 +1,5 @@
-.cover-book{
-    float: left;
-    margin-right: 10px;
+.new-review{
+    margin-left: 10px;
 }
 
 .nav{
@@ -21,4 +20,20 @@
 
 .commentor-options:hover{
     background-color: antiquewhite;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.note{
+    width: 100%;
+    max-width: 600px;
+}
+
+.cover-book{
+    float: left;
+    margin-right: 10px;  
 }
